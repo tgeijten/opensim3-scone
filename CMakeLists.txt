@@ -132,28 +132,28 @@ MARK_AS_ADVANCED( BUILD_INST_SET )
 IF(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU" OR 
    ${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
 
-    # C++11.
+    # C++17.
     # ------
     # If using either of these compilers, provide the option of 
-    # compiling using the c++11 standard.
-    OPTION(OPENSIM_STANDARD_11
-        "Compile using the C++11 standard, if using GCC or Clang." OFF)
+    # compiling using the c++17 standard.
+    OPTION(OPENSIM_STANDARD_17
+        "Compile using the C++17 standard, if using GCC or Clang." ON)
     
-    IF(OPENSIM_STANDARD_11)
+    IF(OPENSIM_STANDARD_17)
         # Using C++11 on OSX requires using libc++ instead of libstd++.
         # libc++ is an implementation of the C++ standard library for OSX.
         IF(APPLE)
             IF(XCODE)
-                SET(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "c++11")
+                SET(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "c++17")
                 SET(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libc++")
             ELSE()
-                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
                 IF(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
                     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
                 ENDIF()
             ENDIF()
         ELSE() # not APPLE
-            SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+            SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
         ENDIF()
     ENDIF()
 
