@@ -128,7 +128,8 @@ Storage::Storage(const string &aFileName, bool readHeadersOnly) :
 
 	int nr=0,nc=0;
 	if (!parseHeaders(*fp, nr, nc)) throw Exception("Storage: ERROR- failed to parse headers of file " + aFileName, __FILE__,__LINE__);
-	cout << "Storage: file=" << aFileName << " (nr=" << nr << " nc=" << nc << ")" << endl;
+	// TG: removed cout to stop cluttering the console
+	// cout << "Storage: file=" << aFileName << " (nr=" << nr << " nc=" << nc << ")" << endl;
 	// Motion files from SIMM are in degrees
 	if (_fileVersion < 1 && (0 == aFileName.compare (aFileName.length() - 4, 4, ".mot"))) _inDegrees = true;
 	if (_fileVersion < 1) cout << ".. assuming rotations in " << (_inDegrees?"Degrees.":"Radians.") << endl;

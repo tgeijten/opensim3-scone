@@ -163,7 +163,8 @@ Model::Model(const string &aFileName, const bool connectModel) :
     _analysisSet.setMemoryOwner(false);
 
 	if (connectModel) setup();
-	cout << "Loaded model " << getName() << " from file " << getInputFileName() << endl;
+	// TG: removed cout to stop cluttering the console
+	//cout << "Loaded model " << getName() << " from file " << getInputFileName() << endl;
 }
 //_____________________________________________________________________________
 /**
