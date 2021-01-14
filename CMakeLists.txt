@@ -18,6 +18,10 @@ if(COMMAND cmake_policy)
     endif()
 endif(COMMAND cmake_policy)
 
+# OPENSIM_LIBRARY_PREFIX 
+# This is used to allow the OpenSim 3 binaries to sit next to OpenSim 4 binaries without name clashes
+SET( OPENSIM_LIBRARY_PREFIX "osim" CACHE STRING "All OpenSim libraries will start with this prefix" )
+
 
 SET(BUILD_BINARY_DIR ${CMAKE_BINARY_DIR}
     CACHE PATH 

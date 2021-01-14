@@ -2,7 +2,7 @@
 # Automatically create tests using files named "test*.cpp"	// Adopted from SimTK core
 FILE(GLOB TEST_PROGS "*est*.cpp")
 
-LINK_LIBRARIES(debug osimLepton_d	optimized osimLepton)
+LINK_LIBRARIES(debug ${OPENSIM_LIBRARY_PREFIX}Lepton_d	optimized ${OPENSIM_LIBRARY_PREFIX}Lepton)
 
 FOREACH(TEST_PROG ${TEST_PROGS})
     GET_FILENAME_COMPONENT(TEST_ROOT ${TEST_PROG} NAME_WE)

@@ -2,7 +2,7 @@ SET(KIT Tools)
 SET(UKIT TOOLS)
 
 ## Version Stuff
-SET(OPENSIM_OSIMTOOLS_LIBRARY_NAME osim${Kit})
+SET(OPENSIM_OSIMTOOLS_LIBRARY_NAME ${OPENSIM_LIBRARY_PREFIX}${Kit})
 SET(OPENSIM_OSIMTOOLS_MAJOR_VERSION 3)
 SET(OPENSIM_OSIMTOOLS_MINOR_VERSION 0)
 SET(OPENSIM_OSIMTOOLS_BUILD_VERSION 0)
@@ -27,15 +27,15 @@ INCLUDE_DIRECTORIES(
 
 SET(EXPORT_MACRO OSIM${UKIT}_EXPORTS)
 
-ADD_LIBRARY(osim${KIT} SHARED ${SOURCE_FILES} ${INCLUDE_FILES})
+ADD_LIBRARY(${OPENSIM_LIBRARY_PREFIX}${KIT} SHARED ${SOURCE_FILES} ${INCLUDE_FILES})
 
 # SimmKinematicsEngine library only needed for SimmFileWriter...
-TARGET_LINK_LIBRARIES(osim${KIT}
-	debug osimCommon${CMAKE_DEBUG_POSTFIX} optimized osimCommon
-	debug osimSimulation${CMAKE_DEBUG_POSTFIX} optimized osimSimulation
-	debug osimAnalyses${CMAKE_DEBUG_POSTFIX} optimized osimAnalyses
-	debug osimActuators${CMAKE_DEBUG_POSTFIX} optimized osimActuators
-	debug osimAnalyses${CMAKE_DEBUG_POSTFIX} optimized osimAnalyses
+TARGET_LINK_LIBRARIES(${OPENSIM_LIBRARY_PREFIX}${KIT}
+	debug ${OPENSIM_LIBRARY_PREFIX}Common${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Common
+	debug ${OPENSIM_LIBRARY_PREFIX}Simulation${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Simulation
+	debug ${OPENSIM_LIBRARY_PREFIX}Analyses${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Analyses
+	debug ${OPENSIM_LIBRARY_PREFIX}Actuators${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Actuators
+	debug ${OPENSIM_LIBRARY_PREFIX}Analyses${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Analyses
 	${SIMTK_ALL_LIBS})
 
 				
@@ -43,21 +43,21 @@ LINK_DIRECTORIES( ${SIMTK_LIB_DIR} ${OpenSim_LIBS_DIR} )
  
 
 SET_TARGET_PROPERTIES(
-	osim${KIT} PROPERTIES
+	${OPENSIM_LIBRARY_PREFIX}${KIT} PROPERTIES
 	DEFINE_SYMBOL ${EXPORT_MACRO}
-	PROJECT_LABEL "Libraries - osim${KIT}")
+	PROJECT_LABEL "Libraries - ${OPENSIM_LIBRARY_PREFIX}${KIT}")
 
 # Shared libraries are needed at runtime for applications, so we put them
 # at the top level in OpenSim/bin/*.dll (Windows) or OpenSim/lib/*.so (Linux)
 # or OpemSim/lib/*.dylib (Mac). Windows .lib files, and Linux/Mac .a static
 # archives are only needed at link time so go in sdk/lib.
 IF(WIN32)
-    INSTALL(TARGETS osim${KIT}
+    INSTALL(TARGETS ${OPENSIM_LIBRARY_PREFIX}${KIT}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION sdk/lib
             ARCHIVE DESTINATION sdk/lib)
 ELSE()
-    INSTALL(TARGETS osim${KIT}
+    INSTALL(TARGETS ${OPENSIM_LIBRARY_PREFIX}${KIT}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib
             ARCHIVE DESTINATION sdk/lib)
