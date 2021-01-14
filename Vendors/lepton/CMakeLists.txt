@@ -4,7 +4,7 @@ SET(UKIT LEPTON)
 ##
 ## Version stuff
 ##
-SET(OPENSIM_LEPTON_LIBRARY_NAME osim${KIT})
+SET(OPENSIM_LEPTON_LIBRARY_NAME ${OPENSIM_LIBRARY_PREFIX}${KIT})
 SET(OPENSIM_LEPTON_MAJOR_VERSION 1)
 SET(OPENSIM_LEPTON_MINOR_VERSION 1)
 SET(OPENSIM_LEPTON_BUILD_VERSION 0)
@@ -30,21 +30,21 @@ IF(WIN32)
 ADD_DEFINITIONS("-DLEPTON_BUILDING_SHARED_LIBRARY")
 ENDIF(WIN32)
 
-ADD_LIBRARY(osim${KIT} SHARED ${SOURCE_FILES} ${INCLUDE_FILES}) 
+ADD_LIBRARY(${OPENSIM_LIBRARY_PREFIX}${KIT} SHARED ${SOURCE_FILES} ${INCLUDE_FILES}) 
 
-SET_TARGET_PROPERTIES(osim${KIT} PROPERTIES PROJECT_LABEL "Vendor Libraries - osim${KIT}")
+SET_TARGET_PROPERTIES(${OPENSIM_LIBRARY_PREFIX}${KIT} PROPERTIES PROJECT_LABEL "Vendor Libraries - ${OPENSIM_LIBRARY_PREFIX}${KIT}")
 
 # Shared libraries are needed at runtime for applications, so we put them
 # at the top level in OpenSim/bin/*.dll (Windows) or OpenSim/lib/*.so (Linux)
 # or OpemSim/lib/*.dylib (Mac). Windows .lib files, and Linux/Mac .a static
 # archives are only needed at link time so go in sdk/lib.
 IF(WIN32)
-    INSTALL(TARGETS osim${KIT}
+    INSTALL(TARGETS ${OPENSIM_LIBRARY_PREFIX}${KIT}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION sdk/lib
             ARCHIVE DESTINATION sdk/lib)
 ELSE()
-    INSTALL(TARGETS osim${KIT}
+    INSTALL(TARGETS ${OPENSIM_LIBRARY_PREFIX}${KIT}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib
             ARCHIVE DESTINATION sdk/lib)
