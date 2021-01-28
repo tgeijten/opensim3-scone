@@ -7,9 +7,9 @@ ADD_EXECUTABLE(${APPNAME} ${APPNAME}.cpp)
 
 # cmake should automatically figure out what other libraries are needed
 TARGET_LINK_LIBRARIES(${APPNAME}
-          debug osimTools${CMAKE_DEBUG_POSTFIX} optimized osimTools
-          debug osimCommon${CMAKE_DEBUG_POSTFIX} optimized osimCommon
-          debug osimSimulation${CMAKE_DEBUG_POSTFIX} optimized osimSimulation
+          debug ${OPENSIM_LIBRARY_PREFIX}Tools${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Tools
+          debug ${OPENSIM_LIBRARY_PREFIX}Common${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Common
+          debug ${OPENSIM_LIBRARY_PREFIX}Simulation${CMAKE_DEBUG_POSTFIX} optimized ${OPENSIM_LIBRARY_PREFIX}Simulation
           debug ${NameSpace}SimTKcommon${CMAKE_DEBUG_POSTFIX} optimized ${NameSpace}SimTKcommon)
 
 
